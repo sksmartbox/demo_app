@@ -1,0 +1,70 @@
+App Name: Samara
+Bundle Identitifier :	com.app.sampra
+
+Local URL:
+Api : "http://100.100.7.34:8000/api/";
+Socket: "http://100.100.7.34:3057";
+
+Live URL:
+Api : "http://sampra.flexsin.org/backend/public/api/";
+Socket: "http://sampra.flexsin.org:3057";
+
+
+Api endpoints:
+(1) Social Data
+	method:	get
+	endpoint: social_detail
+	params:	(a) type	=> ex: 0,1,2,3
+		(b) page	=> ex: 1,2,3...
+	
+Note: "type" 0 for all, 1 for facebook, 2 for twitter and 3 for instagram.
+
+
+(2) About Us Data
+	method:	get
+	endpoint: about_us
+	params:	none
+	
+
+(3) Contact Data
+	method:	get
+	endpoint: contact_us	
+	params:	none	
+  	
+
+(4) Email Us Data
+	method:	post(form data)
+	endpoint: contact_form	
+	params:	(a) name
+                (b) email
+                (c) phone_number
+                (d) message
+                (e) query_type
+                (f) file
+	
+Note: "query_type" 1 for 'Membership Query', 2 for 'Royalties Query' and 3 for'General Query'.
+
+
+(5) Add/Update Chat User
+	method:	post(form data)
+	endpoint: contact_form	
+	params:	(a) name
+                (b) email
+                (c) contact_number
+                (d) user_id
+                (e) file
+
+(6) Register Device Token
+	method:	post(form data)
+	endpoint: push-notification/device-token	
+	params:	(a) token
+
+
+(7) Update Device Token
+	method:	post(form data)
+	endpoint: push-notification/update/device-token	
+	params:	(a) token
+		(b) status
+		(c) user_id
+	
+	
