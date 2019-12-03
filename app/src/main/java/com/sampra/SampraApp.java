@@ -8,5 +8,6 @@ public class SampraApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
     }
 }
