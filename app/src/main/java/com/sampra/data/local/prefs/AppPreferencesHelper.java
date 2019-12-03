@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import com.sampra.di.scope.PreferenceInfo;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 public class AppPreferencesHelper implements PreferencesHelper {
 

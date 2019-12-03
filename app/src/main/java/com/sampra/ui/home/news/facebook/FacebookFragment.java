@@ -1,4 +1,4 @@
-package com.sampra.ui.home.news;
+package com.sampra.ui.home.news.facebook;
 
 
 import android.os.Bundle;

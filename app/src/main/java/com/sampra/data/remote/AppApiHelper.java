@@ -26,7 +26,6 @@ import javax.inject.Singleton;
 import io.reactivex.Single;
 
 
-@Singleton
 public class AppApiHelper implements ApiHelper {
 
     private final ApiManager apiManager;
@@ -42,6 +41,20 @@ public class AppApiHelper implements ApiHelper {
         return apiManager.getAll(type, page);
     }
 
+    @Override
+    public Single<AllModel> facebook(String type, String page) {
+        return null;
+    }
+
+    @Override
+    public Single<AllModel> twitter(String type, String page) {
+        return null;
+    }
+
+    @Override
+    public Single<AllModel> instagram(String type, String page) {
+        return null;
+    }
 
 
 }

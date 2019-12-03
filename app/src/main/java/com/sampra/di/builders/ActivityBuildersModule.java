@@ -1,6 +1,8 @@
 package com.sampra.di.builders;
 
 import com.sampra.ui.home.HomeActivity;
+import com.sampra.ui.home.news.NewsFragmentProvider;
+import com.sampra.ui.home.news.all.AllFragmentProvider;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -9,6 +11,9 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuildersModule {
 
 
-//    @ContributesAndroidInjector
-//    abstract HomeActivity bindHomeActivity();
+    @ContributesAndroidInjector(modules = {
+            NewsFragmentProvider.class,
+            AllFragmentProvider.class
+    })
+    abstract HomeActivity bindHomeActivity();
 }

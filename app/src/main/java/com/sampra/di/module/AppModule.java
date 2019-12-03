@@ -12,7 +12,9 @@ import com.sampra.data.AppDataManager;
 import com.sampra.data.DataManager;
 import com.sampra.data.local.prefs.AppPreferencesHelper;
 import com.sampra.data.local.prefs.PreferencesHelper;
+import com.sampra.data.remote.ApiHelper;
 import com.sampra.data.remote.ApiManager;
+import com.sampra.data.remote.AppApiHelper;
 import com.sampra.di.scope.PreferenceInfo;
 import com.sampra.utils.rx.AppConstants;
 import com.sampra.utils.rx.AppSchedulerProvider;
@@ -37,24 +39,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AppModule {
 
     @Provides
-    @Singleton
     Context provideContext(Application application) {
         return application;
     }
 
     @Provides
-    @Singleton
     DataManager provideDataManager(AppDataManager appDataManager) {
         return appDataManager;
     }
 
     @Provides
-    @Singleton
     Gson provideGson() {
-
-
         return new GsonBuilder()
-                .setLongSerializationPolicy( LongSerializationPolicy.STRING )
+//                .setLongSerializationPolicy( LongSerializationPolicy.STRING )
 //                .setDateFormat(DateFormat.LONG)
 //                .registerTypeAdapter(Date.class, new JsonDateDeserializer())
 //                .registerTypeAdapter(Date.class, serializer)
@@ -64,7 +61,6 @@ public class AppModule {
     }
 
 
-    @Singleton
     @Provides
     OkHttpClient providerOkHttpClient(PreferencesHelper preferencesHelper){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -95,7 +91,6 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
     ApiManager provideApiManager(OkHttpClient client, Gson gson){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstants.BASE_URL)
@@ -114,8 +109,13 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
     PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
         return appPreferencesHelper;
+    }
+
+
+    @Provides
+    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
+        return appApiHelper;
     }
 }

@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/allFragment"
-        android:name="com.sampra.ui.home.news.AllFragment"
+        android:name="com.sampra.ui.home.news.all.AllFragment"
         android:label="fragment_all"
         tools:layout="@layout/fragment_all" />
     <fragment
         android:id="@+id/facebookFragment"
-        android:name="com.sampra.ui.home.news.FacebookFragment"
+        android:name="com.sampra.ui.home.news.facebook.FacebookFragment"
         android:label="fragment_facebook"
         tools:layout="@layout/fragment_facebook" />
     <fragment
         android:id="@+id/twitterFragment"
-        android:name="com.sampra.ui.home.news.TwitterFragment"
+        android:name="com.sampra.ui.home.news.twitter.TwitterFragment"
         android:label="fragment_twitter"
         tools:layout="@layout/fragment_twitter" />
     <fragment
         android:id="@+id/instsgramFragment"
-        android:name="com.sampra.ui.home.news.InstsgramFragment"
+        android:name="com.sampra.ui.home.news.instagram.InstsgramFragment"
         android:label="fragment_instsgram"
         tools:layout="@layout/fragment_instsgram" />
 </navigation>

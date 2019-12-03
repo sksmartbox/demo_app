@@ -2,7 +2,7 @@ package com.sampra.utils.rx;
 
 public final  class AppConstants {
 
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = "http://sampra.flexsin.org/";
 
 
     public static final int API_STATUS_CODE_LOCAL_ERROR = 0;

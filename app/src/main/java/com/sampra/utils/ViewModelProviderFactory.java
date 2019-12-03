@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sampra.data.DataManager;
 import com.sampra.ui.home.HomeViewModel;
+import com.sampra.ui.home.news.all.AllViewModel;
 import com.sampra.utils.rx.SchedulerProvider;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 @SuppressWarnings("unchecked")
 public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFactory {
@@ -28,6 +30,8 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         if (modelClass.isAssignableFrom(HomeViewModel.class)) {
             //noinspection unchecked
             return (T) new HomeViewModel(dataManager,schedulerProvider);
+        } else if(modelClass.isAssignableFrom(AllViewModel.class)){
+            return (T) new AllViewModel(dataManager,schedulerProvider);
         }
 
         /*else  if (modelClass.isAssignableFrom(SignUpViewModel.class)) {

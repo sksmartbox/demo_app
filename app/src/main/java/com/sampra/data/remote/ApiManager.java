@@ -9,7 +9,15 @@ import retrofit2.http.Query;
 
 public interface ApiManager {
 
-
-    @GET("social_detail")
+    @GET("backend/public/api/social_detail")
     Single<AllModel> getAll(@Query("type") String type, @Query("page") String page);
+
+    @GET("backend/public/api/social_detail")
+    Single<AllModel> facebook(@Query("type") String type, @Query("page") String page);
+
+    @GET("backend/public/api/social_detail")
+    Single<AllModel> twitter(@Query("type") String type, @Query("page") String page);
+
+    @GET("backend/public/api/social_detail")
+    Single<AllModel> instagram(@Query("type") String type, @Query("page") String page);
 }

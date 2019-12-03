@@ -1,4 +1,6 @@
 package com.sampra.data;
 
-public interface DataManager {
+import com.sampra.data.remote.ApiManager;
+
+public interface DataManager extends ApiManager {
 }

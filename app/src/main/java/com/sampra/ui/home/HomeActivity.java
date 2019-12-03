@@ -7,29 +7,60 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sampra.BR;
 import com.sampra.R;
+import com.sampra.databinding.ActivityMainBinding;
 import com.sampra.ui.about.AboutUsActivity;
+import com.sampra.ui.base.BaseActivity;
 import com.sampra.ui.settings.SettingActivity;
+import com.sampra.utils.ViewModelProviderFactory;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+import javax.inject.Inject;
+
+public class HomeActivity extends BaseActivity<ActivityMainBinding, HomeViewModel> implements View.OnClickListener, HomeNavigator {
     BottomNavigationView navView;
     ImageView about_us,settings;
+
+    @Inject
+    ViewModelProviderFactory factory;
+    HomeViewModel mHomeViewModel;
+    private ActivityMainBinding activityHomeBinding;
 
     public static Intent openActivity(Context context) {
         return new Intent(context, HomeActivity.class);
     }
 
     @Override
+    public int getBindingVariable() {
+        return com.sampra.BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public HomeViewModel getViewModel() {
+        mHomeViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
+        return mHomeViewModel;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+        activityHomeBinding = getViewDataBinding();
+        mHomeViewModel.setNavigator(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initView();
@@ -42,6 +73,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    @Override
+    protected void requestWindowFeature() {
+
     }
 
     private void initView() {
@@ -67,5 +103,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 this.startActivity(intent_setting);
                 break;
         }
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
     }
 }
