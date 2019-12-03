@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sampra.R;
+import com.sampra.ui.about.AboutUsActivity;
+import com.sampra.ui.settings.SettingActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +33,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initView();
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -55,7 +58,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.about_us:
-                Intent intent_about = new Intent(this, About_usActivity.class);
+                Intent intent_about = new Intent(this, AboutUsActivity.class);
                 this.startActivity(intent_about);
                 break;
 

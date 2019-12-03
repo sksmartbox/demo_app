@@ -1,4 +1,4 @@
-package com.sampra.ui.home;
+package com.sampra.ui.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
