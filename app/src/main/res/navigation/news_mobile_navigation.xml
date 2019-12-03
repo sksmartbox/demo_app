@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_twitter" />
     <fragment
         android:id="@+id/instsgramFragment"
-        android:name="com.sampra.ui.home.news.instagram.InstsgramFragment"
+        android:name="com.sampra.ui.home.news.instagram.InstagramFragment"
         android:label="fragment_instsgram"
         tools:layout="@layout/fragment_instsgram" />
 </navigation>
