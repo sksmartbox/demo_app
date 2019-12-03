@@ -18,13 +18,20 @@
         android:layout_height="match_parent"
         tools:context=".AllFragment">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="All"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recyclerView"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"/>
+       </LinearLayout>
 
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            style="?android:attr/progressBarStyleLarge"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            android:layout_height="wrap_content"/>
     </FrameLayout>
 </layout>

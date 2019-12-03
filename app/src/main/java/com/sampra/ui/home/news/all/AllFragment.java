@@ -6,7 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +18,11 @@ import com.sampra.BR;
 import com.sampra.R;
 import com.sampra.data.model.AllModel;
 import com.sampra.databinding.FragmentAllBinding;
+import com.sampra.ui.adapter.AllAdapter;
 import com.sampra.ui.base.BaseFragment;
 import com.sampra.utils.ViewModelProviderFactory;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -27,6 +32,8 @@ public class AllFragment extends BaseFragment<FragmentAllBinding,AllViewModel> i
     @Inject
     ViewModelProviderFactory factory;
     private AllViewModel viewModel;
+    AllAdapter allAdapter;
+
 
     private FragmentAllBinding binding;
 
@@ -72,15 +79,20 @@ public class AllFragment extends BaseFragment<FragmentAllBinding,AllViewModel> i
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
+        allAdapter = new AllAdapter(new ArrayList<>());
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerView.setAdapter(allAdapter);
     }
 
     @Override
     public void handleError(Throwable throwable) {
-
+        Log.e("TAG","handle Error", throwable);
     }
 
     @Override
     public void response(AllModel allModel) {
-        Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+        if (allModel.isStatus()){
+          allAdapter.addItem(allModel.getRecords());
+        }
     }
 }

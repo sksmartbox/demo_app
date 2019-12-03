@@ -17,6 +17,7 @@ public class AllViewModel extends BaseViewModel<AllNewsFragementNavigator> {
     }
 
     public void getAll(String type, String page){
+        setIsLoading(true);
         getCompositeDisposable().add(
                 getDataManager().getAll(type,page)
                 .subscribeOn(Schedulers.io())
@@ -24,6 +25,7 @@ public class AllViewModel extends BaseViewModel<AllNewsFragementNavigator> {
                 .subscribe(new Consumer<AllModel>() {
                     @Override
                     public void accept(AllModel allModel) throws Exception {
+                        setIsLoading(false);
                         try {
                             if (allModel != null){
                                 getNavigator().response(allModel);
@@ -35,6 +37,7 @@ public class AllViewModel extends BaseViewModel<AllNewsFragementNavigator> {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        setIsLoading(false);
                         getNavigator().handleError(throwable);
                     }
                 })
