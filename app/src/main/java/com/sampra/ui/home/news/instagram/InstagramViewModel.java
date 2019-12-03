@@ -14,7 +14,7 @@ public class InstagramViewModel extends BaseViewModel<InstagramFragementNavigato
 
     public InstagramViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getAll("0","1");
+        getAll("3","1");
     }
 
     public void getAll(String type, String page){
@@ -30,7 +30,7 @@ public class InstagramViewModel extends BaseViewModel<InstagramFragementNavigato
                                 getNavigator().response(allModel);
                             }
                         }catch (Exception e){
-                            getNavigator().handleError(new Throwable("Something went worng"));
+                            getNavigator().handleError(new Throwable(e));
                         }
                     }
                 }, new Consumer<Throwable>() {
@@ -42,5 +42,8 @@ public class InstagramViewModel extends BaseViewModel<InstagramFragementNavigato
         );
     }
 
+    public void clear(){
+        onCleared();
+    }
 
 }

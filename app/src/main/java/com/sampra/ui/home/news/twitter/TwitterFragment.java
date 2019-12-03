@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.sampra.BR;
 import com.sampra.R;
+import com.sampra.data.model.AllModel;
 import com.sampra.databinding.FragmentInstsgramBinding;
 import com.sampra.databinding.FragmentTwitterBinding;
 import com.sampra.ui.base.BaseFragment;
@@ -22,7 +23,7 @@ import com.sampra.utils.ViewModelProviderFactory;
 import javax.inject.Inject;
 
 
-public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, TwitterViewModel> {
+public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, TwitterViewModel> implements TwitterFragementNavigator {
 
 
     @Inject
@@ -55,6 +56,7 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel.setNavigator(this);
 
     }
 
@@ -74,4 +76,13 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
         super.onDetach();
     }
 
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void response(AllModel allModel) {
+
+    }
 }

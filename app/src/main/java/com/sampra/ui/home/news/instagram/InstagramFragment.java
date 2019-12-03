@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.sampra.BR;
 import com.sampra.R;
+import com.sampra.data.model.AllModel;
 import com.sampra.databinding.FragmentInstsgramBinding;
 import com.sampra.ui.base.BaseFragment;
 import com.sampra.ui.home.news.facebook.FacebookViewModel;
@@ -20,7 +21,7 @@ import com.sampra.utils.ViewModelProviderFactory;
 
 import javax.inject.Inject;
 
-public class InstagramFragment extends BaseFragment<FragmentInstsgramBinding, InstagramViewModel> {
+public class InstagramFragment extends BaseFragment<FragmentInstsgramBinding, InstagramViewModel> implements InstagramFragementNavigator {
 
     @Inject
     ViewModelProviderFactory factory;
@@ -53,7 +54,7 @@ public class InstagramFragment extends BaseFragment<FragmentInstsgramBinding, In
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        viewModel.setNavigator(this);
 
     }
 /*
@@ -69,5 +70,21 @@ public class InstagramFragment extends BaseFragment<FragmentInstsgramBinding, In
         super.onViewCreated(view, savedInstanceState);
 
         binding = getViewDataBinding();
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void response(AllModel allModel) {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        viewModel.clear();
+        super.onDestroyView();
     }
 }

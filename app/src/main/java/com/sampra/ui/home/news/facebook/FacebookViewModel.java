@@ -14,7 +14,7 @@ public class FacebookViewModel extends BaseViewModel<FacebookFragementNavigator>
 
     public FacebookViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getAll("0","1");
+        getAll("1","1");
     }
 
     public void getAll(String type, String page){

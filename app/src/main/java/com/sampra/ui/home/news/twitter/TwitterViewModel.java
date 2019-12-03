@@ -14,7 +14,7 @@ public class TwitterViewModel extends BaseViewModel<TwitterFragementNavigator> {
 
     public TwitterViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getAll("0","1");
+        getAll("2","1");
     }
 
     public void getAll(String type, String page){
@@ -30,7 +30,7 @@ public class TwitterViewModel extends BaseViewModel<TwitterFragementNavigator> {
                                 getNavigator().response(allModel);
                             }
                         }catch (Exception e){
-                            getNavigator().handleError(new Throwable("Something went worng"));
+                            getNavigator().handleError(new Throwable(e));
                         }
                     }
                 }, new Consumer<Throwable>() {
@@ -40,6 +40,11 @@ public class TwitterViewModel extends BaseViewModel<TwitterFragementNavigator> {
                     }
                 })
         );
+    }
+
+
+    public void clear(){
+        onCleared();
     }
 
 

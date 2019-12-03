@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sampra.data.DataManager;
 import com.sampra.ui.home.HomeViewModel;
 import com.sampra.ui.home.news.all.AllViewModel;
+import com.sampra.ui.home.news.facebook.FacebookViewModel;
+import com.sampra.ui.home.news.instagram.InstagramViewModel;
+import com.sampra.ui.home.news.twitter.TwitterViewModel;
 import com.sampra.utils.rx.SchedulerProvider;
 
 import javax.inject.Inject;
@@ -32,6 +35,12 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
             return (T) new HomeViewModel(dataManager,schedulerProvider);
         } else if(modelClass.isAssignableFrom(AllViewModel.class)){
             return (T) new AllViewModel(dataManager,schedulerProvider);
+        } else if(modelClass.isAssignableFrom(FacebookViewModel.class)){
+            return (T) new FacebookViewModel(dataManager,schedulerProvider);
+        }else if(modelClass.isAssignableFrom(TwitterViewModel.class)){
+            return (T) new TwitterViewModel(dataManager,schedulerProvider);
+        }else if(modelClass.isAssignableFrom(InstagramViewModel.class)){
+            return (T) new InstagramViewModel(dataManager,schedulerProvider);
         }
 
         /*else  if (modelClass.isAssignableFrom(SignUpViewModel.class)) {

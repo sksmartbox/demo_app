@@ -78,6 +78,16 @@ dependencies {
 
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
 
+    def paging_version = "2.1.0"
+
+    implementation "androidx.paging:paging-runtime:$paging_version" // For Kotlin use paging-runtime-ktx
+
+    // alternatively - without Android dependencies for testing
+    testImplementation "androidx.paging:paging-common:$paging_version" // For Kotlin use paging-common-ktx
+
+    // optional - RxJava support
+    implementation "androidx.paging:paging-rxjava2:$paging_version"
+
 //    implementation 'com.amazonaws:aws-android-sdk-s3:2.16.1'
 //    implementation 'com.amazonaws:aws-android-sdk-cognito:2.16.1'
 //    implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.16.1'
