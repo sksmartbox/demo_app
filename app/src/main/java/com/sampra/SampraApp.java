@@ -4,17 +4,21 @@ import android.app.Application;
 
 import com.sampra.di.components.DaggerAppComponent;
 
-public class SampraApp extends Application {
+import dagger.android.AndroidInjector;
+import dagger.android.support.DaggerApplication;
+
+public class SampraApp extends DaggerApplication {
 
 
     @Override
     public void onCreate() {
         super.onCreate();
+    }
 
-
-        DaggerAppComponent.builder()
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder()
                 .application(this)
-                .build()
-                .inject(this);
+                .build();
     }
 }
