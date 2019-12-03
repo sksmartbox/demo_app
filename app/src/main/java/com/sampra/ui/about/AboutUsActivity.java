@@ -1,4 +1,4 @@
-package com.sampra.ui.home;
+package com.sampra.ui.about;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +16,7 @@ import com.sampra.adapter.ViewPagerAdapter;
 import com.skyhope.showmoretextview.ShowMoreTextView;
 
 
-public class About_usActivity extends AppCompatActivity {
+public class AboutUsActivity extends AppCompatActivity {
     Toolbar toolbar;
     ShowMoreTextView textView,textView1;
     ViewPager viewPager;
