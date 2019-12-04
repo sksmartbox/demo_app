@@ -43,17 +43,17 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<AllModel> facebook(String type, String page) {
-        return null;
+        return apiManager.facebook(type, page);
     }
 
     @Override
     public Single<AllModel> twitter(String type, String page) {
-        return null;
+        return apiManager.twitter(type,page);
     }
 
     @Override
     public Single<AllModel> instagram(String type, String page) {
-        return null;
+        return apiManager.instagram(type,page);
     }
 
 

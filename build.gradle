@@ -50,7 +50,7 @@ ext {
     rx2FastAndroidNetworking = '1.0.1'
 
     dagger2Version = '2.16'
-    rxjava2Version = '2.1.9'
+    rxjava2Version = '2.2.2'
     rxandroidVersion = '2.0.2'
     placeholderviewVersion = '0.6.1'
     debugDBVersion = '1.0.3'

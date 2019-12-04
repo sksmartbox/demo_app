@@ -1,5 +1,7 @@
 package com.sampra.ui.home.news.instagram;
 
+import androidx.databinding.ObservableBoolean;
+
 import com.sampra.data.DataManager;
 import com.sampra.data.model.AllModel;
 import com.sampra.ui.base.BaseViewModel;
@@ -12,6 +14,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class InstagramViewModel extends BaseViewModel<InstagramFragementNavigator> {
 
+    private final ObservableBoolean mIsLoadingShimmer = new ObservableBoolean();
+
     public InstagramViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         getAll("3","1");
@@ -19,7 +23,7 @@ public class InstagramViewModel extends BaseViewModel<InstagramFragementNavigato
 
     public void getAll(String type, String page){
         getCompositeDisposable().add(
-                getDataManager().getAll(type,page)
+                getDataManager().instagram(type,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<AllModel>() {
@@ -41,6 +45,44 @@ public class InstagramViewModel extends BaseViewModel<InstagramFragementNavigato
                 })
         );
     }
+
+
+    public ObservableBoolean getIsLoadingShimmer() {
+        return mIsLoadingShimmer;
+    }
+
+    public void setIsLoadingShimmer(boolean isLoading) {
+        mIsLoadingShimmer.set(isLoading);
+    }
+
+    public void getNextAll(String type, String page){
+        setIsLoading(true);
+        getCompositeDisposable().add(
+                getDataManager().instagram(type,page)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<AllModel>() {
+                            @Override
+                            public void accept(AllModel allModel) throws Exception {
+                                setIsLoading(false);
+                                try {
+                                    if (allModel != null){
+                                        getNavigator().nextResponse(allModel);
+                                    }
+                                }catch (Exception e){
+                                    getNavigator().handleError(new Throwable("Something went worng"));
+                                }
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                setIsLoading(false);
+                                getNavigator().handleError(throwable);
+                            }
+                        })
+        );
+    }
+
 
     public void clear(){
         onCleared();
