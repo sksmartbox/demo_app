@@ -86,7 +86,7 @@ dependencies {
 
     // optional - RxJava support
     implementation "androidx.paging:paging-rxjava2:$paging_version"
-
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 //    implementation 'com.amazonaws:aws-android-sdk-s3:2.16.1'
 //    implementation 'com.amazonaws:aws-android-sdk-cognito:2.16.1'
 //    implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.16.1'

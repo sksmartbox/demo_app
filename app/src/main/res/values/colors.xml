@@ -8,4 +8,5 @@
     <color name="black_overlay">#66000000</color>
     <color name="non_active_dot">#66000000</color>
     <color name="active_dot">#0078D7</color>
+    <color name="background">#dddddd</color>
 </resources>

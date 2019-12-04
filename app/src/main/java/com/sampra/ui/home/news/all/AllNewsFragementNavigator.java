@@ -8,4 +8,11 @@ public interface AllNewsFragementNavigator {
     void handleError(Throwable throwable);
 
     void response(AllModel allModel);
+
+
+    void nextResponse(AllModel allViewModel);
+
+    void startAnimation();
+
+    void stopAnimation();
 }

@@ -36,8 +36,8 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.empty_item, parent, false);
                 return new EmptyViewHolder(view);
             case ITEM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
-                return new AllViewHolder(view);
+//                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
+//                return new AllViewHolder(view);
             default:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
                 return new AllViewHolder(view);
@@ -75,6 +75,12 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
     public void addItem(List<RecordsItem> itemList){
         this.itemList = itemList;
         notifyDataSetChanged();
+    }
+
+    public void updateItems(List<RecordsItem> records) {
+        int currentSize = this.itemList.size();
+        this.itemList.addAll(records);
+        notifyItemRangeInserted(currentSize, records.size() - 1);
     }
 
 
