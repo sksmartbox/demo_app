@@ -29,6 +29,9 @@ public final  class AppConstants {
     public static final String PRICE = "price";
     public static final String SHARED_PREFERENCE = "shared_deelzat";
     public static final String TOKEN = "token";
+    public static final int FACEBOOK = 1;
+    public static final int TWITTER = 2;
+    public static final int INSTAGRAM = 3;
 
 
     private AppConstants() {

@@ -17,10 +17,10 @@ public class RecordsItem{
 	private String postLink;
 
 	@SerializedName("post_comment")
-	private Object postComment;
+	private String postComment;
 
 	@SerializedName("post_like")
-	private Object postLike;
+	private String postLike;
 
 	@SerializedName("created_at")
 	private String createdAt;
@@ -72,19 +72,19 @@ public class RecordsItem{
 		return postLink;
 	}
 
-	public void setPostComment(Object postComment){
+	public void setPostComment(String postComment){
 		this.postComment = postComment;
 	}
 
-	public Object getPostComment(){
+	public String getPostComment(){
 		return postComment;
 	}
 
-	public void setPostLike(Object postLike){
+	public void setPostLike(String postLike){
 		this.postLike = postLike;
 	}
 
-	public Object getPostLike(){
+	public String getPostLike(){
 		return postLike;
 	}
 

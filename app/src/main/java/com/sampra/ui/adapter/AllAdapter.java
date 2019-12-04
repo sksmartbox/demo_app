@@ -1,5 +1,7 @@
 package com.sampra.ui.adapter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.sampra.R;
 import com.sampra.data.model.RecordsItem;
 import com.sampra.ui.home.news.all.AllViewModel;
+import com.sampra.utils.rx.AppConstants;
 
 import java.util.List;
 
@@ -84,21 +87,75 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
     }
 
 
-    public class AllViewHolder extends BaseViewHolder {
+    public class AllViewHolder extends BaseViewHolder  {
 
-        ImageView image;
+        ImageView image, type, comment, like;
         TextView updateDate;
         TextView desc;
 
         public AllViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imageView);
+            type = itemView.findViewById(R.id.type);
+            comment = itemView.findViewById(R.id.comment);
+            like = itemView.findViewById(R.id.like);
             desc = itemView.findViewById(R.id.description);
             updateDate = itemView.findViewById(R.id.updateDate);
         }
 
         @Override
         public void bind(RecordsItem item) {
+
+            type.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent =new Intent(Intent.ACTION_VIEW);
+                    if (item.getPostLink() != null && !TextUtils.isEmpty(item.getPostLink())) {
+                        intent.setData(Uri.parse(item.getPostLink()));
+                        itemView.getContext().startActivity(intent);
+                    }
+                }
+            });
+
+            if (!TextUtils.isEmpty(item.getPostLike())) {
+                like.setVisibility(View.VISIBLE);
+                like.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        if (item.getPostLike() != null && !TextUtils.isEmpty(item.getPostLike())) {
+                            intent.setData(Uri.parse(item.getPostLike()));
+                            itemView.getContext().startActivity(intent);
+                        }
+                    }
+                });
+            }else {
+                like.setVisibility(View.GONE);
+            }
+
+            if (!TextUtils.isEmpty(item.getPostComment())) {
+                comment.setVisibility(View.VISIBLE);
+                comment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        if (item.getPostComment() != null && !TextUtils.isEmpty(item.getPostComment())) {
+                            intent.setData(Uri.parse(item.getPostComment()));
+                            itemView.getContext().startActivity(intent);
+                        }
+                    }
+                });
+            } else {
+                comment.setVisibility(View.GONE);
+            }
+
+            if (item.getType() == AppConstants.FACEBOOK){
+                type.setImageResource(R.drawable.facebook);
+            } else if (item.getType() == AppConstants.TWITTER){
+                type.setImageResource(R.drawable.twitter);
+            } else if (item.getType() == AppConstants.INSTAGRAM){
+                type.setImageResource(R.drawable.insta);
+            }
 
             desc.setText(item.getPostDescription());
             updateDate.setText(item.getUpdatedAt());
@@ -111,6 +168,8 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
                 image.setVisibility(View.GONE);
             }
         }
+
+
     }
 
 
