@@ -20,6 +20,8 @@ import com.sampra.utils.rx.AppConstants;
 
 import java.util.List;
 
+import static com.sampra.utils.TextDescriptionUitls.makeTextViewResizable;
+
 public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> {
 
     public static final int EMPTY_ITEM = 0;
@@ -157,7 +159,13 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
                 type.setImageResource(R.drawable.insta);
             }
 
-            desc.setText(item.getPostDescription());
+            if (!TextUtils.isEmpty(item.getPostDescription())){
+                desc.setVisibility(View.VISIBLE);
+                desc.setText(item.getPostDescription());
+                makeTextViewResizable(desc, 3, "See More", true);
+            } else {
+                desc.setVisibility(View.GONE);
+            }
             updateDate.setText(item.getUpdatedAt());
             if (!TextUtils.isEmpty(item.getPostImage())){
                 image.setVisibility(View.VISIBLE);
