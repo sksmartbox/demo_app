@@ -22,4 +22,10 @@
         android:name="com.sampra.ui.home.contact.ContacatFragment"
         android:label="@string/contact"
         tools:layout="@layout/fragment_contact" />
+
+    <fragment
+        android:id="@+id/navigation_chatScreen"
+        android:name="com.sampra.ui.home.livechat.ChatScreenFragment"
+        android:label="@string/chat"
+        tools:layout="@layout/fragment_chat_screen" />
 </navigation>

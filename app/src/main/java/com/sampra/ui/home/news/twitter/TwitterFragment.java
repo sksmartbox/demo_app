@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,12 @@ import com.sampra.R;
 import com.sampra.data.model.AllModel;
 import com.sampra.databinding.FragmentInstsgramBinding;
 import com.sampra.databinding.FragmentTwitterBinding;
+import com.sampra.ui.adapter.AllAdapter;
 import com.sampra.ui.base.BaseFragment;
 import com.sampra.ui.home.news.instagram.InstagramViewModel;
 import com.sampra.utils.ViewModelProviderFactory;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -30,6 +34,7 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
     ViewModelProviderFactory factory;
     private TwitterViewModel viewModel;
     FragmentTwitterBinding binding;
+    AllAdapter allAdapter;
 
 
     public static TwitterFragment newInstance(String param1, String param2) {
@@ -69,6 +74,10 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding = getViewDataBinding();
+        allAdapter = new AllAdapter(new ArrayList<>());
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerView.setAdapter(allAdapter);
     }
 
     @Override
@@ -83,6 +92,8 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
 
     @Override
     public void response(AllModel allModel) {
-
+        if (allModel.isStatus()){
+            allAdapter.addItem(allModel.getRecords());
+        }
     }
 }

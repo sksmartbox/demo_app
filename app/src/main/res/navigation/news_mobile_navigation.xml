@@ -25,4 +25,9 @@
         android:name="com.sampra.ui.home.news.instagram.InstagramFragment"
         android:label="fragment_instsgram"
         tools:layout="@layout/fragment_instsgram" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.sampra.ui.home.livechat.ChatScreenFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat_screen" />
 </navigation>

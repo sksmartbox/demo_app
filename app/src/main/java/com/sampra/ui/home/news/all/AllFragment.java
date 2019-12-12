@@ -2,18 +2,11 @@ package com.sampra.ui.home.news.all;
 
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.sampra.BR;
 import com.sampra.R;
 import com.sampra.data.model.AllModel;
@@ -21,9 +14,7 @@ import com.sampra.databinding.FragmentAllBinding;
 import com.sampra.ui.adapter.AllAdapter;
 import com.sampra.ui.base.BaseFragment;
 import com.sampra.utils.ViewModelProviderFactory;
-
 import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 
@@ -33,8 +24,6 @@ public class AllFragment extends BaseFragment<FragmentAllBinding,AllViewModel> i
     ViewModelProviderFactory factory;
     private AllViewModel viewModel;
     AllAdapter allAdapter;
-
-
     private FragmentAllBinding binding;
 
     public AllFragment() {

@@ -10,5 +10,5 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:text="Empty" />
+        android:text="" />
 </LinearLayout>

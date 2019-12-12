@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_live"
+    app:startDestination="@+id/navigation_live_chat">
+
+
+    <fragment
+        android:id="@+id/navigation_live_chat"
+        android:name="com.sampra.ui.home.livechat.ChatSendFragment"
+        android:label="@string/livechat"
+        tools:layout="@layout/fragment_live_chat" />
+
+
+    <fragment
+        android:id="@+id/navigation_chatScreen"
+        android:name="com.sampra.ui.home.livechat.ChatScreenFragment"
+        android:label="@string/chat"
+        tools:layout="@layout/fragment_chat_screen" />
+</navigation>

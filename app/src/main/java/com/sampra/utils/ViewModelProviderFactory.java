@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sampra.data.DataManager;
 import com.sampra.ui.home.HomeViewModel;
+import com.sampra.ui.home.livechat.ChatScreenFragment;
 import com.sampra.ui.home.news.all.AllViewModel;
 import com.sampra.ui.home.news.facebook.FacebookViewModel;
 import com.sampra.ui.home.news.instagram.InstagramViewModel;

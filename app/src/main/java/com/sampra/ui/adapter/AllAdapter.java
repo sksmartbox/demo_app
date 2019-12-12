@@ -9,19 +9,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.sampra.R;
+import com.sampra.data.model.AllModel;
 import com.sampra.data.model.RecordsItem;
 import com.sampra.ui.home.news.all.AllViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> {
 
     public static final int EMPTY_ITEM = 0;
     public static final int ITEM = 1;
-
     private List<RecordsItem> itemList;
 
     public AllAdapter(List<RecordsItem> itemList) {
@@ -83,19 +85,41 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
         ImageView image;
         TextView updateDate;
         TextView desc;
+        TextView like,comment;
+        ImageView social_icon;
 
         public AllViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imageView);
             desc = itemView.findViewById(R.id.description);
             updateDate = itemView.findViewById(R.id.updateDate);
+            social_icon = itemView.findViewById(R.id.social_icon);
+            like = itemView.findViewById(R.id.like_txt);
+            comment = itemView.findViewById(R.id.comment_txt);
         }
 
         @Override
         public void bind(RecordsItem item) {
-
+            int a;
             desc.setText(item.getPostDescription());
-            updateDate.setText(item.getUpdatedAt());
+            getUpdateDate(item.getUpdatedAt(),updateDate);
+            if(item.getPostComment() == null)
+                comment.setText("");
+            else
+//                a = Integer.parseInt(item.getPostComment().toString());
+                comment.setText(item.getPostComment().toString());
+            if(item.getType() == 1)
+            {
+                social_icon.setImageResource(R.drawable.facebook);
+            }
+            if(item.getType() == 2)
+            {
+                social_icon.setImageResource(R.drawable.twitter);
+            }
+            if(item.getType() == 3)
+            {
+                social_icon.setImageResource(R.drawable.insta);
+            }
             if (!TextUtils.isEmpty(item.getPostImage())){
                 image.setVisibility(View.VISIBLE);
                 Glide.with(itemView.getContext())
@@ -105,6 +129,41 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
                 image.setVisibility(View.GONE);
             }
         }
+    }
+
+    private void getUpdateDate(String updatedAt, TextView updateDate) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String[] splitStr = updatedAt.split(" ");
+        String year = splitStr[0].split("-")[0];
+        String month = splitStr[0].split("-")[1];
+        String day = splitStr[0].split("-")[2];
+        if(month.equals("1") || month.equals("01"))
+            updateDate.setText("Jan "+day+" "+year);
+        else if(month.equals("2") || month.equals("02"))
+            updateDate.setText("Feb "+day+" "+year);
+        else if(month.equals("3") || month.equals("03"))
+            updateDate.setText("Mar "+day+" "+year);
+        else if(month.equals("4") || month.equals("04"))
+            updateDate.setText("April "+day+" "+year);
+        else if(month.equals("5") || month.equals("05"))
+            updateDate.setText("May "+day+" "+year);
+        else if(month.equals("6") || month.equals("06"))
+            updateDate.setText("Jun "+day+" "+year);
+        else if(month.equals("7") || month.equals("07"))
+            updateDate.setText("July "+day+" "+year);
+        else if(month.equals("8") || month.equals("08"))
+            updateDate.setText("Aug "+day+" "+year);
+        else if(month.equals("9") || month.equals("09"))
+            updateDate.setText("Sept "+day+" "+year);
+        else if(month.equals("10") || month.equals("010"))
+            updateDate.setText("Oct "+day+" "+year);
+        else if(month.equals("11") || month.equals("011"))
+            updateDate.setText("Nov "+day+" "+year);
+        else if(month.equals("12") || month.equals("012"))
+            updateDate.setText("Dec "+day+" "+year);
+
+
+
     }
 
 
