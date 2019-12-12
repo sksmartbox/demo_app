@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -54,16 +55,16 @@ import retrofit2.Response;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-public class LiveChatFragment extends Fragment implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
+public class LiveChatFragment extends Fragment  {
     private static final int CAMERA_REQUEST_CODE = 100;
-    private static final int GALLERY_REQUEST_CODE = 101 ;
+    private static final int GALLERY_REQUEST_CODE = 101;
     private LiveChatViewModel liveChatViewModel;
-    private TextInputEditText name,phone,email;
+    private TextInputEditText name, phone, email;
     private Button update_submit_btn;
     private String picturePath;
     private Intent galleryData;
     private CircleImageView profile_image_update;
-    private String user_name,user_email,user_phone;
+    private String user_name, user_email, user_phone;
     private ApiInterface apiService;
     private ChatScreenFragment fragment;
     SharedPreferences sharedPref;
@@ -75,15 +76,10 @@ public class LiveChatFragment extends Fragment implements View.OnClickListener, 
         liveChatViewModel =
                 ViewModelProviders.of(this).get(LiveChatViewModel.class);
         View view = inflater.inflate(R.layout.fragment_live_chat, container, false);
-        initView(view);
-        liveChatViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-            }
-        });
+
         return view;
     }
-
+/*
     private void initView(View view) {
         sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
@@ -281,9 +277,9 @@ public class LiveChatFragment extends Fragment implements View.OnClickListener, 
                             File image = null;
                             try {
                                 image = File.createTempFile(
-                                        imageFileName,  /* prefix */
-                                        ".jpg",         /* suffix */
-                                        getImage      /* directory */
+                                        imageFileName,  *//* prefix *//*
+                                        ".jpg",         *//* suffix *//*
+                                        getImage      *//* directory *//*
                                 );
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -352,9 +348,9 @@ public class LiveChatFragment extends Fragment implements View.OnClickListener, 
             File image = null;
             try {
                 image = File.createTempFile(
-                        imageFileName,  /* prefix */
-                        ".jpg",         /* suffix */
-                        getImage      /* directory */
+                        imageFileName,  *//* prefix *//*
+                        ".jpg",         *//* suffix *//*
+                        getImage      *//* directory *//*
                 );
             } catch (IOException e) {
                 e.printStackTrace();
@@ -390,5 +386,5 @@ public class LiveChatFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
 
-    }
+    }*/
 }
