@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,11 +28,13 @@ import com.sampra.ui.settings.SettingActivity;
 import com.sampra.utils.ViewModelProviderFactory;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -46,7 +49,7 @@ import retrofit2.Response;
 
 public class HomeActivity extends BaseActivity<ActivityMainBinding, HomeViewModel> implements View.OnClickListener, HomeNavigator {
     BottomNavigationView navView;
-    ImageView about_us,settings;
+    ImageView about_us, settings;
 
     @Inject
     ViewModelProviderFactory factory;
@@ -93,7 +96,7 @@ public class HomeActivity extends BaseActivity<ActivityMainBinding, HomeViewMode
                         token = task.getResult().getToken();
                         hitSendDeviceToken();
                         SharedPref.init(getApplicationContext());
-                        SharedPref.write("token",token);
+                        SharedPref.write("token", token);
 
                         // Log and toast
 //                        String msg = getString(R.string.msg_token_fmt, token);
@@ -118,6 +121,21 @@ public class HomeActivity extends BaseActivity<ActivityMainBinding, HomeViewMode
 //                R.id.navigation_news, R.id.navigation_chatScreen, R.id.navigation_contact)
 //                .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                switch (destination.getId()) {
+                    case R.id.navigation_live_chat:
+                        if (login) {
+                            navController.navigate(R.id.navigation_chatScreen);
+                        } else {
+                            navController.navigate(R.id.navigation_live_chat);
+                        }
+                        Toast.makeText(HomeActivity.this, "" + destination.getId(), Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
@@ -146,6 +164,7 @@ public class HomeActivity extends BaseActivity<ActivityMainBinding, HomeViewMode
 
     private void initView() {
         navView = findViewById(R.id.nav_view);
+
         about_us = findViewById(R.id.about_us);
         settings = findViewById(R.id.setting);
 
@@ -155,8 +174,7 @@ public class HomeActivity extends BaseActivity<ActivityMainBinding, HomeViewMode
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.about_us:
                 Intent intent_about = new Intent(this, AboutUsActivity.class);
                 this.startActivity(intent_about);

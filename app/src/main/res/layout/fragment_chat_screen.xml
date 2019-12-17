@@ -9,6 +9,7 @@
 
 <RelativeLayout
     android:orientation="vertical"
+    android:layout_marginBottom="@dimen/_64sdp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
