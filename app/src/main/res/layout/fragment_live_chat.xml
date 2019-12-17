@@ -13,13 +13,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginRight="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:cardCornerRadius="@dimen/_16sdp"
-        android:elevation="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_60sdp"
-        >
+        android:layout_marginBottom="@dimen/_40sdp">
+<!--       android:layout_marginLeft="@dimen/_16sdp"-->
+<!--        android:layout_marginRight="@dimen/_16sdp"-->
+<!--        android:layout_marginTop="@dimen/_20sdp"-->
+<!--        app:cardCornerRadius="@dimen/_16sdp"-->
+<!--        android:elevation="@dimen/_5sdp"-->
+
 
         <fragment
             android:id="@+id/nav_host_chat_fragment"

@@ -17,6 +17,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            android:background="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -30,8 +31,14 @@
                     android:layout_height="match_parent"
                     android:text="@string/about_us"
                     android:textAlignment="center"
+                    android:textColor="@color/title_text_color"
                     android:textStyle="bold"
                     android:textSize="@dimen/_16sdp"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/setting"
                     />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -77,7 +84,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:src="@drawable/avtar"/>
+                    android:src="@drawable/tune"/>
 
                 <com.skyhope.showmoretextview.ShowMoreTextView
                     android:id="@+id/text_view_show_more"
@@ -108,7 +115,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:src="@drawable/avtar"/>
+                    android:src="@drawable/tune"/>
 
                 <com.skyhope.showmoretextview.ShowMoreTextView
                     android:id="@+id/text_view_show_more1"

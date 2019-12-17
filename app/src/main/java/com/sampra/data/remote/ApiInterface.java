@@ -1,6 +1,8 @@
 package com.sampra.data.remote;
 import com.sampra.data.model.ContactFormModel;
 import com.sampra.data.model.about_us.AboutUsModel;
+import com.sampra.data.model.contactUs.ContactUsModel;
+import com.sampra.data.model.notification.DeviceTokenModel;
 import com.sampra.data.model.profile_update.UpdateProfileModel;
 
 import java.util.Map;
@@ -23,6 +25,9 @@ public interface ApiInterface {
     @GET("about_us")
     Call<AboutUsModel> getAboutUsDetails();
 
+    @GET("contact_us")
+    Call<ContactUsModel> getContactUsDetails();
+
     @Multipart
     @POST("contact_form")
     Call<ContactFormModel> getContactFormDetails(@Part MultipartBody.Part file, @Part("name") RequestBody name, @Part("email") RequestBody email, @Part("phone_number") RequestBody phone_number,
@@ -35,4 +40,12 @@ public interface ApiInterface {
     @Multipart
     @POST("add_chatuser")
     Call<UpdateProfileModel> getProfileUpdateWithoutImage(@Part("name") RequestBody name, @Part("email") RequestBody email, @Part("contact_number") RequestBody phone_number);
+
+    @Multipart
+    @POST("push-notification/device-token")
+    Call<DeviceTokenModel> getDeviceToken(@Part("token") RequestBody token);
+
+    @Multipart
+    @POST("push-notification/update/device-token")
+    Call<DeviceTokenModel> getUpdateDeviceToken(@Part("token") RequestBody token,@Part("status") RequestBody status,@Part("user_id") RequestBody user_id);
 }

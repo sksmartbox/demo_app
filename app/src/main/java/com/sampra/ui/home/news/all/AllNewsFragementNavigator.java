@@ -8,4 +8,5 @@ public interface AllNewsFragementNavigator {
     void handleError(Throwable throwable);
 
     void response(AllModel allModel);
+    void responseNext(AllModel allModel);
 }

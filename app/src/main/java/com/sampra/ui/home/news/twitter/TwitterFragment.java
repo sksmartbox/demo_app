@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.sampra.data.model.AllModel;
 import com.sampra.databinding.FragmentInstsgramBinding;
 import com.sampra.databinding.FragmentTwitterBinding;
 import com.sampra.ui.adapter.AllAdapter;
+import com.sampra.ui.adapter.EndlessRecyclerViewScrollListener;
 import com.sampra.ui.base.BaseFragment;
 import com.sampra.ui.home.news.instagram.InstagramViewModel;
 import com.sampra.utils.ViewModelProviderFactory;
@@ -35,6 +37,7 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
     private TwitterViewModel viewModel;
     FragmentTwitterBinding binding;
     AllAdapter allAdapter;
+    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
 
 
     public static TwitterFragment newInstance(String param1, String param2) {
@@ -76,8 +79,22 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
         allAdapter = new AllAdapter(new ArrayList<>());
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setAdapter(allAdapter);
+
+        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                loadNextDataFromApi(page);
+            }
+        };
+
+        binding.recyclerView.addOnScrollListener(recyclerViewScrollListener);
+    }
+
+    private void loadNextDataFromApi(int page) {
+        viewModel.getAll("pagation", page+"");
     }
 
     @Override
@@ -94,6 +111,13 @@ public class TwitterFragment extends BaseFragment<FragmentTwitterBinding, Twitte
     public void response(AllModel allModel) {
         if (allModel.isStatus()){
             allAdapter.addItem(allModel.getRecords());
+        }
+    }
+
+    @Override
+    public void responseNext(AllModel allModel) {
+        if (allModel.isStatus()){
+            allAdapter.addItemUpdate(allModel.getRecords());
         }
     }
 }

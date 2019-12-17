@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.sampra.data.model.AllModel;
 import com.sampra.databinding.FragmentAllBinding;
 import com.sampra.databinding.FragmentFacebookBinding;
 import com.sampra.ui.adapter.AllAdapter;
+import com.sampra.ui.adapter.EndlessRecyclerViewScrollListener;
 import com.sampra.ui.base.BaseFragment;
 import com.sampra.ui.home.news.all.AllViewModel;
 import com.sampra.utils.ViewModelProviderFactory;
@@ -35,6 +37,8 @@ public class FacebookFragment extends BaseFragment<FragmentFacebookBinding, Face
     private FacebookViewModel viewModel;
     AllAdapter allAdapter;
     private FragmentFacebookBinding binding;
+    private LinearLayoutManager linearLayoutManager;
+    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
 
 
     public static FacebookFragment newInstance(String param1, String param2) {
@@ -76,8 +80,22 @@ public class FacebookFragment extends BaseFragment<FragmentFacebookBinding, Face
         super.onViewCreated(view, savedInstanceState);
         binding =getViewDataBinding();
         allAdapter = new AllAdapter(new ArrayList<>());
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setAdapter(allAdapter);
+
+        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                loadNextDataFromApi(page);
+            }
+        };
+
+        binding.recyclerView.addOnScrollListener(recyclerViewScrollListener);
+    }
+
+    private void loadNextDataFromApi(int page) {
+        viewModel.getAll("pagation", page+"");
     }
 
     @Override
@@ -89,6 +107,13 @@ public class FacebookFragment extends BaseFragment<FragmentFacebookBinding, Face
     public void response(AllModel allModel) {
         if (allModel.isStatus()){
             allAdapter.addItem(allModel.getRecords());
+        }
+    }
+
+    @Override
+    public void responseNext(AllModel allModel) {
+        if (allModel.isStatus()){
+            allAdapter.addItemUpdate(allModel.getRecords());
         }
     }
 }

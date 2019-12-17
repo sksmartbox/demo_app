@@ -1,5 +1,7 @@
 package com.sampra.ui.adapter;
 
+import android.graphics.Color;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.sampra.R;
 import com.sampra.data.model.AllModel;
 import com.sampra.data.model.RecordsItem;
 import com.sampra.ui.home.news.all.AllViewModel;
+import com.skyhope.showmoretextview.ShowMoreTextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -79,12 +82,18 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void addItemUpdate(List<RecordsItem> itemList){
+        int size = this.itemList.size();
+        this.itemList.addAll(itemList);
+        notifyItemRangeChanged(size,this.itemList.size()-1);
+    }
+
 
     public class AllViewHolder extends BaseViewHolder {
 
         ImageView image;
         TextView updateDate;
-        TextView desc;
+        ShowMoreTextView desc;
         TextView like,comment;
         ImageView social_icon;
 
@@ -101,12 +110,14 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
         @Override
         public void bind(RecordsItem item) {
             int a;
-            desc.setText(item.getPostDescription());
+            desc.setText(Html.fromHtml(item.getPostDescription()));
+            getReadMore(desc);
             getUpdateDate(item.getUpdatedAt(),updateDate);
             if(item.getPostComment() == null)
-                comment.setText("");
+                comment.setText("0");
+            else if(((Double) item.getPostComment()).doubleValue()==0.0)
+                comment.setText("0");
             else
-//                a = Integer.parseInt(item.getPostComment().toString());
                 comment.setText(item.getPostComment().toString());
             if(item.getType() == 1)
             {
@@ -129,6 +140,15 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.BaseViewHolder> 
                 image.setVisibility(View.GONE);
             }
         }
+    }
+
+    private void getReadMore(ShowMoreTextView desc) {
+        desc.setShowingChar(100);
+        desc.setShowingLine(3);
+        desc.addShowMoreText("Read More");
+        desc.addShowLessText("Read Less");
+        desc.setShowMoreColor(Color.BLUE); // or other color
+        desc.setShowLessTextColor(Color.BLUE);
     }
 
     private void getUpdateDate(String updatedAt, TextView updateDate) {

@@ -3,6 +3,7 @@ package com.sampra.ui.settings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -23,12 +24,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
 import com.sampra.R;
 import com.sampra.data.model.profile_update.UpdateProfileModel;
 import com.sampra.data.remote.ApiClient;
 import com.sampra.data.remote.ApiInterface;
 import com.sampra.ui.home.livechat.ChatScreenFragment;
+import com.sampra.ui.home.sharePref.SharedPref;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,31 +55,49 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     private static final int CAMERA_REQUEST_CODE = 100;
     private static final int GALLERY_REQUEST_CODE = 101 ;
     private CircleImageView profile_image_update;
-    private TextInputEditText name,phone,email;
+    public TextInputEditText name,phone,email;
     private Button update_submit_btn;
     private String user_name,user_phone,user_email;
     private ApiInterface apiService;
     private String picturePath;
     private Intent galleryData;
-    SharedPreferences sharedPref;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        SharedPref.init(getApplicationContext());
         initView();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    private void initView() {
+    public void initView() {
+        toolbar = findViewById(R.id.toolbar);
         profile_image_update = findViewById(R.id.profile_image_update);
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         update_submit_btn = findViewById(R.id.update_submit_btn);
+        setValue();
         profile_image_update.setOnClickListener(this);
         update_submit_btn.setOnClickListener(this);
-//        name.setText(sharedPref.getString(R.string.profile_name),"");
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void setValue() {
+        name.setText(SharedPref.read("user_name",null));
+        email.setText(SharedPref.read("user_email",null));
+        phone.setText(SharedPref.read("user_phone",null));
+        if(SharedPref.read("user_image",null) != null)
+        Glide.with(this).load(SharedPref.read("user_image",null)).placeholder(R.drawable.chatbot).into(profile_image_update);
     }
 
     @Override
@@ -134,7 +155,12 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             call.enqueue(new Callback<UpdateProfileModel>() {
                 @Override
                 public void onResponse(Call<UpdateProfileModel> call, Response<UpdateProfileModel> response) {
-                    Toast.makeText(getApplicationContext(),response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    SharedPref.write("user_name",response.body().getUserDetail().getName().toString());
+                    SharedPref.write("user_email",response.body().getUserDetail().getEmail().toString());
+                    SharedPref.write("user_phone",response.body().getUserDetail().getContactNumber().toString());
+                    SharedPref.write("user_id",response.body().getUserDetail().getUserId().toString());
+                    SharedPref.write("user_image",response.body().getUserDetail().getImage().toString());
+                    finish();
                 }
 
                 @Override
@@ -157,8 +183,11 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
             call.enqueue(new Callback<UpdateProfileModel>() {
                 @Override
                 public void onResponse(Call<UpdateProfileModel> call, Response<UpdateProfileModel> response) {
-                    Toast.makeText(getApplicationContext(),response.body().getMessage(), Toast.LENGTH_LONG).show();
-
+                    SharedPref.write("user_name",response.body().getUserDetail().getName().toString());
+                    SharedPref.write("user_email",response.body().getUserDetail().getEmail().toString());
+                    SharedPref.write("user_phone",response.body().getUserDetail().getContactNumber().toString());
+                    SharedPref.write("user_id",response.body().getUserDetail().getUserId().toString());
+                    finish();
                 }
 
                 @Override

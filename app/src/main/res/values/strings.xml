@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sampra</string>
+    <string name="app_name">SAMPRA</string>
     <string name="news">News</string>
     <string name="livechat">Live Chat</string>
     <string name="contact">Contact</string>
@@ -20,6 +20,7 @@
     <string name="hint_contactNumber">Contact Number*</string>
     <string name="hint_email">Email Address*</string>
     <string name="login_btn">Submit</string>
+    <string name="update_btn">UPDATE</string>
     <string name="email_btn">Email Us</string>
     <string name="apply_btn">Apply/Notify</string>
     <string name="location_desc">20 De Krote Street</string>
@@ -31,6 +32,8 @@
     <string name="profile_email">profile_email</string>
     <string name="settings">Settings</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="email_us">Email Us</string>
+    <string name="hint_chat_msg">Enter message...</string>
     <string name="enable_push">Enable Push Notifications?</string>
     <string name="in_app_msg">In-App-Messages</string>
     <string name="instagram">Instagram</string>

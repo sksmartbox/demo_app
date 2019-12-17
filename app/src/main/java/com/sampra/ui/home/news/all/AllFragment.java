@@ -2,29 +2,38 @@ package com.sampra.ui.home.news.all;
 
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
+
 import com.sampra.BR;
 import com.sampra.R;
 import com.sampra.data.model.AllModel;
 import com.sampra.databinding.FragmentAllBinding;
 import com.sampra.ui.adapter.AllAdapter;
+import com.sampra.ui.adapter.EndlessRecyclerViewScrollListener;
 import com.sampra.ui.base.BaseFragment;
 import com.sampra.utils.ViewModelProviderFactory;
+
 import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 
-public class AllFragment extends BaseFragment<FragmentAllBinding,AllViewModel> implements AllNewsFragementNavigator {
+public class AllFragment extends BaseFragment<FragmentAllBinding, AllViewModel> implements AllNewsFragementNavigator {
 
     @Inject
     ViewModelProviderFactory factory;
     private AllViewModel viewModel;
     AllAdapter allAdapter;
     private FragmentAllBinding binding;
+    private LinearLayoutManager linearLayoutManager;
+    private EndlessRecyclerViewScrollListener recyclerViewScrollListener;
 
     public AllFragment() {
         // Required empty public constructor
@@ -69,19 +78,40 @@ public class AllFragment extends BaseFragment<FragmentAllBinding,AllViewModel> i
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
         allAdapter = new AllAdapter(new ArrayList<>());
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
         binding.recyclerView.setAdapter(allAdapter);
+
+        recyclerViewScrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                loadNextDataFromApi(page);
+            }
+        };
+
+        binding.recyclerView.addOnScrollListener(recyclerViewScrollListener);
+    }
+
+    private void loadNextDataFromApi(int page) {
+            viewModel.getAll("pagation", page+"");
     }
 
     @Override
     public void handleError(Throwable throwable) {
-        Log.e("TAG","handle Error", throwable);
+        Log.e("TAG", "handle Error", throwable);
     }
 
     @Override
     public void response(AllModel allModel) {
-        if (allModel.isStatus()){
-          allAdapter.addItem(allModel.getRecords());
+        if (allModel.isStatus()) {
+            allAdapter.addItemUpdate(allModel.getRecords());
+        }
+    }
+
+    @Override
+    public void responseNext(AllModel allModel) {
+        if (allModel.isStatus()) {
+            allAdapter.addItem(allModel.getRecords());
         }
     }
 }

@@ -14,28 +14,41 @@ public class InstagramViewModel extends BaseViewModel<InstagramFragementNavigato
 
     public InstagramViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getAll("3","1");
+        getAll("initial","1");
     }
 
-    public void getAll(String type, String page){
+    public void getAll(String initialization, String page){
+        setIsLoading(true);
         getCompositeDisposable().add(
-                getDataManager().getAll(type,page)
+                getDataManager().getAll("3",page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<AllModel>() {
                     @Override
                     public void accept(AllModel allModel) throws Exception {
-                        try {
-                            if (allModel != null){
-                                getNavigator().response(allModel);
+                        setIsLoading(false);
+                        if (initialization.equalsIgnoreCase("initial")){
+                            try {
+                                if (allModel != null){
+                                    getNavigator().response(allModel);
+                                }
+                            }catch (Exception e){
+                                getNavigator().handleError(new Throwable("Something went worng"));
                             }
-                        }catch (Exception e){
-                            getNavigator().handleError(new Throwable(e));
+                        } else {
+                            try {
+                                if (allModel != null){
+                                    getNavigator().responseNext(allModel);
+                                }
+                            }catch (Exception e){
+//                                getNavigator().handleError(new Throwable("Something went worng"));
+                            }
                         }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        setIsLoading(false);
                         getNavigator().handleError(throwable);
                     }
                 })

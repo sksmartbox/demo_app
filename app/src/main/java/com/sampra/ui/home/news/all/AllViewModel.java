@@ -13,26 +13,37 @@ public class AllViewModel extends BaseViewModel<AllNewsFragementNavigator> {
 
     public AllViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getAll("0","1");
+        getAll("initial","1");
     }
 
-    public void getAll(String type, String page){
+    public void getAll(String initialization, String page){
         setIsLoading(true);
         getCompositeDisposable().add(
-                getDataManager().getAll(type,page)
+                getDataManager().getAll("0",page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<AllModel>() {
                     @Override
                     public void accept(AllModel allModel) throws Exception {
                         setIsLoading(false);
-                        try {
-                            if (allModel != null){
-                                getNavigator().response(allModel);
+                        if (initialization.equalsIgnoreCase("initial")){
+                            try {
+                                if (allModel != null){
+                                    getNavigator().response(allModel);
+                                }
+                            }catch (Exception e){
+                                getNavigator().handleError(new Throwable("Something went worng"));
                             }
-                        }catch (Exception e){
-                            getNavigator().handleError(new Throwable("Something went worng"));
+                        } else {
+                            try {
+                                if (allModel != null){
+                                    getNavigator().responseNext(allModel);
+                                }
+                            }catch (Exception e){
+//                                getNavigator().handleError(new Throwable("Something went worng"));
+                            }
                         }
+
                     }
                 }, new Consumer<Throwable>() {
                     @Override

@@ -79,6 +79,8 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
         initView();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setSpinnerAdapter();
     }
 
@@ -90,13 +92,13 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
+        toolbar = findViewById(R.id.toolbar);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phone);
         query_msg = findViewById(R.id.msg);
         submit_btn = findViewById(R.id.submit_btn);
         attach_btn = findViewById(R.id.attach_btn);
-        toolbar = findViewById(R.id.toolbar);
         spinner = findViewById(R.id.spinner);
         imageView = findViewById(R.id.imageView);
         toolbar.setTitle("Email Us");

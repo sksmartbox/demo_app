@@ -12,7 +12,6 @@
         android:label="@string/livechat"
         tools:layout="@layout/fragment_live_chat" />
 
-
     <fragment
         android:id="@+id/navigation_chatScreen"
         android:name="com.sampra.ui.home.livechat.ChatScreenFragment"

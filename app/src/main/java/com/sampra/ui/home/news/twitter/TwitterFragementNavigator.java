@@ -8,4 +8,6 @@ public interface TwitterFragementNavigator {
     void handleError(Throwable throwable);
 
     void response(AllModel allModel);
+
+    void responseNext(AllModel allModel);
 }

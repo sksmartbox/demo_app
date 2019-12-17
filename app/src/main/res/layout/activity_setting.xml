@@ -16,20 +16,30 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
+                android:background="@color/colorWhite"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_16sdp"
+                        android:layout_height="match_parent"
+                        android:text="@string/settings"
+                        android:textAlignment="center"
+                        android:textColor="@color/title_text_color"
                         android:textStyle="bold"
-                        android:text="@string/settings"/>
+                        android:textSize="@dimen/_16sdp"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:src="@drawable/setting"
+                        />
                 </LinearLayout>
-
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -37,32 +47,57 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_6sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp"
                 android:weightSum="2"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/news_selected"/>
+                        android:src="@drawable/avtar"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"
+                            android:text="user name"/>
+                        <TextView
+                            android:id="@+id/user_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"
+                            android:text="1234567890"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
                     android:gravity="end"
                     android:orientation="horizontal">
                     <TextView
@@ -70,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_6sdp"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textColor="#ffffff"
                         android:textStyle="bold"
                         android:background="@drawable/rounded_corner"
@@ -83,26 +118,29 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_6sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp"
                 android:weightSum="6"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
-                    android:gravity="start"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_6sdp"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/colorBlack"
                         android:textStyle="bold"
                         android:text="@string/enable_push"/>
                 </LinearLayout>
@@ -115,13 +153,13 @@
 
                     <ImageView
                         android:id="@+id/toggle_on"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
                         android:src="@drawable/toggle_on"/>
                     <ImageView
                         android:id="@+id/toggle_off"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
                         android:visibility="gone"
                         android:src="@drawable/toggle_off"/>
                 </LinearLayout>
@@ -145,7 +183,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/notification_content"
-                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -153,15 +192,16 @@
                     android:gravity="center"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
                         android:src="@drawable/rounded_corner"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/in_app_msg"
+                        android:textColor="@color/colorBlack"
                         android:padding="@dimen/_6sdp"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <LinearLayout
@@ -170,15 +210,16 @@
                     android:gravity="center"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
                         android:src="@drawable/rounded_corner"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/instagram"
                         android:padding="@dimen/_6sdp"
-                        android:textSize="@dimen/_16sdp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <LinearLayout
@@ -187,15 +228,16 @@
                     android:gravity="center"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
                         android:src="@drawable/rounded_corner"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/facebook"
+                        android:textColor="@color/colorBlack"
                         android:padding="@dimen/_6sdp"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <LinearLayout
@@ -204,15 +246,16 @@
                     android:gravity="center"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
                         android:src="@drawable/rounded_corner"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/twitter"
+                        android:textColor="@color/colorBlack"
                         android:padding="@dimen/_6sdp"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <LinearLayout
@@ -221,15 +264,16 @@
                     android:gravity="center"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_8sdp"
                         android:src="@drawable/rounded_corner"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/website"
+                        android:textColor="@color/colorBlack"
                         android:padding="@dimen/_6sdp"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <TextView
@@ -237,7 +281,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/notes"
                     android:padding="@dimen/_6sdp"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/colorBlack"
                     android:textStyle="bold"/>
 
 
